@@ -10,6 +10,7 @@ from textnode import (
     text_type_link,
 )
 
+
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         node = TextNode("This is a text node", text_type_text)
@@ -38,7 +39,9 @@ class TestTextNode(unittest.TestCase):
 
     def test_repr(self):
         node = TextNode("This is a text node", text_type_text, "www.boot.dev")
-        self.assertEqual(repr(node), "TextNode(This is a text node, text, www.boot.dev)" )
+        self.assertEqual(
+            repr(node), "TextNode(This is a text node, text, www.boot.dev)"
+        )
 
 
 if __name__ == "__main__":
