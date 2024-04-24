@@ -10,7 +10,11 @@ from textnode import (
     text_type_link,
 )
 
-from inline_markdown import split_nodes_delimiter
+from inline_markdown import (
+    split_nodes_delimiter,
+    extract_markdown_images,
+    extract_markdown_links,
+)
 
 
 class TestTextNode(unittest.TestCase):
@@ -64,6 +68,62 @@ class TestTextNode(unittest.TestCase):
                 TextNode("another", text_type_bold),
             ],
             new_nodes,
+        )
+
+    def test_extract_images_two_images(self):
+        text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and ![another](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png)"
+        self.assertListEqual(
+            [
+                (
+                    "image",
+                    "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png",
+                ),
+                (
+                    "another",
+                    "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png",
+                ),
+            ],
+            extract_markdown_images(text),
+        )
+
+    def test_extract_images_one_image(self):
+        text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png)"
+        self.assertListEqual(
+            [
+                (
+                    "image",
+                    "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png",
+                ),
+            ],
+            extract_markdown_images(text),
+        )
+
+    def test_extract_links_two_links(self):
+        text = "This is text with an [link](www.google.com) and [another](www.boot.dev/another)"
+        self.assertListEqual(
+            [
+                (
+                    "link",
+                    "www.google.com",
+                ),
+                (
+                    "another",
+                    "www.boot.dev/another",
+                ),
+            ],
+            extract_markdown_links(text),
+        )
+
+    def test_extract_links_one_link(self):
+        text = "This is text with an [link](www.boot.dev/another)"
+        self.assertListEqual(
+            [
+                (
+                    "link",
+                    "www.boot.dev/another",
+                ),
+            ],
+            extract_markdown_links(text),
         )
 
 
