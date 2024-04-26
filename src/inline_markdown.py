@@ -37,3 +37,13 @@ def extract_markdown_images(text):
 def extract_markdown_links(text):
     matches = re.findall(r"\[(.*?)\]\((.*?)\)", text)
     return matches
+
+
+def split_nodes_images(old_nodes):
+    pass
+
+def split_nodes_link(old_nodes):
+    pass
+
+
+
