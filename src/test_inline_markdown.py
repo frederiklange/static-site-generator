@@ -20,7 +20,7 @@ from inline_markdown import (
 )
 
 
-class TestTextNode(unittest.TestCase):
+class TestInlineMarkdown(unittest.TestCase):
     def test_split_nodes_delimiter_bold(self):
         node = TextNode("This is a **bold** text node", text_type_text)
         self.assertListEqual(
