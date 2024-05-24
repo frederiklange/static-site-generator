@@ -1,6 +1,5 @@
-from textnode import TextNode
 from copy_static import copy_files_recursive
-from generate_page import generate_page
+from generate_page import generate_pages_recursive
 import os, shutil
 
 dir_path_static = "./static"
@@ -18,11 +17,7 @@ def main():
     copy_files_recursive(dir_path_static, dir_path_public)
 
     print("Generating page...")
-    generate_page(
-        os.path.join(dir_path_content, "index.md"),
-        template_path,
-        os.path.join(dir_path_public, "index.html")
-    )
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public)
 
 if __name__ == "__main__":
     main()
