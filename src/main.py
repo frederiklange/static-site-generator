@@ -19,7 +19,6 @@ def main():
     print("Generating page...")
     generate_pages_recursive(dir_path_content, template_path, dir_path_public)
 
+
 if __name__ == "__main__":
     main()
-
-
